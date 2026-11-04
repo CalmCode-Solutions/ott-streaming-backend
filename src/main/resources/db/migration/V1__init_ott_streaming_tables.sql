@@ -1,10 +1,11 @@
 -- 1. Users Table
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
     role VARCHAR(50) DEFAULT 'USER',
+    enabled BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -83,5 +84,5 @@ INSERT INTO subscription_plans (name, price, resolution, max_screens) VALUES
 
 -- Insert Default Admin User
 -- (Password is 'Admin@12345' hashed with BCrypt)
-INSERT INTO users (name, email, password, role) VALUES
+INSERT INTO users (full_name, email, password_hash, role) VALUES
 ('Admin', 'admin@ott.com', '$2a$10$x.F.0.2Wq/y1W9Zt/C3o6.s6tU.eXk4Z2H/o7uVqK9h3U1f1qM8C6', 'ADMIN');
